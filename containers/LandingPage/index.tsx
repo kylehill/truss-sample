@@ -1,31 +1,50 @@
-import React from "react";
-import Card from "components/Card";
-import { CardColor, CardData } from "types/card";
-import Head from "next/head";
+import { useEffect, useReducer } from "react";
+import { reducer, initialize, LoadingStatus } from "./reducer";
+import PlanetTable from "components/PlanetTable";
+import ErrorBlock from "components/ErrorBlock";
+import LoadingBlock from "components/LoadingBlock";
+import { fetchStarWarsAPIPlanets } from "util/fetchStarWarsAPIPlanets";
+
+// import { mockData } from "./mockData";
+
+import styles from "./styles.module.css";
 
 const LandingPage = () => {
-  const handleClick = (card: CardData): void => {
-    console.log(card);
-  };
+  const [state, dispatch] = useReducer(reducer, null, initialize);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchStarWarsAPIPlanets();
+        dispatch({
+          data,
+          type: "fetch_success",
+        });
+      } catch {
+        dispatch({
+          type: "fetch_failure",
+        });
+      }
+    };
+
+    if (state.loading === LoadingStatus.Initial) {
+      dispatch({
+        type: "fetch_start",
+      });
+      fetchData();
+    }
+  }, []);
 
   return (
-    <div>
-      <Head>
-        <title>Title TKTKTKTK</title>
-      </Head>
-      <h1>hey it's my page</h1>
-      <Card
-        clickable={true}
-        discardable={true}
-        card={{ value: 10, color: CardColor.Red }}
-        onClick={handleClick}
-      />
-      <Card
-        clickable={true}
-        discardable={true}
-        card={{ value: 15, color: CardColor.Blue }}
-        onClick={handleClick}
-      />
+    <div className={styles.container}>
+      {state.loading === LoadingStatus.Loading && <LoadingBlock />}
+      {state.loading === LoadingStatus.Failure && (
+        <ErrorBlock
+          header="Well, actually, that's not a moon. It's a space station."
+          subhead="There was an error retrieving data. Oh no! What have you done?!"
+        />
+      )}
+      {state.loading === LoadingStatus.Success && <PlanetTable planets={state.planets} />}
     </div>
   );
 };

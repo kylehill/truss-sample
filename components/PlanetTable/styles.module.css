@@ -1,0 +1,28 @@
+.table {
+  border-collapse: collapse;
+  font-family: var(--standard-font);
+}
+
+.table th {
+  height: 40px;
+  padding: 15px;
+  border-bottom: var(--standard-border);
+}
+
+.table th:not(:first-child) {
+  border-left: var(--standard-border);
+}
+
+.table tr:not(:last-child) td {
+  border-bottom: var(--standard-border);
+}
+
+.table tbody tr:nth-child(odd) {
+  background: #eee;
+}
+
+.unit {
+  font-size: 0.9em;
+  color: gray;
+  font-weight: normal;
+}

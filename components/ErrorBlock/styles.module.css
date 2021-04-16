@@ -1,0 +1,14 @@
+.block {
+  font-family: var(--standard-font);
+}
+
+.header {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: maroon;
+}
+
+.subhead {
+  font-size: 1.1em;
+  color: #444;
+}

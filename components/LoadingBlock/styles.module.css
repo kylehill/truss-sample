@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+}
+
+.clock {
+  --size: 140px;
+  height: var(--size);
+  width: var(--size);
+  border-radius: var(--size);
+  border: solid 3px gray;
+  position: relative;
+}
+
+.hand {
+  background: gray;
+  position: absolute;
+  bottom: 50%;
+  transform-origin: 50% 100%;
+  left: calc(50% - 2px);
+  width: 4px;
+  border-radius: 2px;
+}
+
+.short {
+  height: 30%;
+  animation: rotate 10s infinite linear;
+}
+
+.long {
+  height: 40%;
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.text {
+  font-family: var(--standard-font);
+  color: #444;
+  font-size: 1.4em;
+  align-self: center;
+  margin-left: 40px;
+}

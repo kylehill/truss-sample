@@ -1,0 +1,38 @@
+.cell {
+  padding: 15px;
+  font-family: var(--standard-font);
+}
+
+.cell:not(:first-child) {
+  border-left: var(--standard-border);
+}
+
+.cell ul {
+  list-style-type: none;
+}
+
+.cell a {
+  text-decoration: none;
+  color: #120a8f;
+}
+
+.cell a:hover {
+  text-decoration: underline;
+}
+
+.number {
+  text-align: right;
+}
+
+.blank {
+  text-align: center;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(233, 206, 205, 0.4) 10px,
+    rgba(233, 206, 205, 0.4) 20px
+  );
+  font-weight: bold;
+  font-size: 1.1em;
+}
