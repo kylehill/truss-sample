@@ -3,6 +3,7 @@ import { StarWarsAPIPlanet, StarWarsAPIResponse } from "types/swapi";
 const SW_API_URL = "https://swapi.dev/api/planets/";
 
 export const fetchSegment = async (url: string): Promise<StarWarsAPIResponse> => {
+  url = url.replace("http://", "https://");
   const response = await fetch(url);
   const data = await response.json();
   return data;
