@@ -31,7 +31,7 @@ const LandingPage = () => {
   return (
     <div className={styles.container}>
       <h1>Official Best Planets Rankings</h1>
-      <p>
+      <p className={styles.subtext}>
         Advice, rankings and data to help you navigate your interplanetary migration journey, from
         the experts at U.S. News and Several Worlds Report.
       </p>
