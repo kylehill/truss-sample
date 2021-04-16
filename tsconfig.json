@@ -24,7 +24,6 @@
     "paths": {
       "components/*": ["components/*"],
       "containers/*": ["containers/*"],
-      "contexts/*": ["contexts/*"],
       "types/*": ["types/*"],
       "util/*": ["util/*"]
     },

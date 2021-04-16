@@ -3,7 +3,6 @@ import type { Planet } from "types/planet";
 import type { Reducer } from "react";
 
 export enum LoadingStatus {
-  Initial,
   Loading,
   Success,
   Failure,
@@ -16,9 +15,6 @@ export type LandingPageState = {
 };
 
 export type LandingPageAction =
-  | {
-      type: "fetch_start";
-    }
   | {
       type: "fetch_success";
       data: StarWarsAPIPlanet[];
@@ -42,20 +38,13 @@ const convertSwapiToPlanet = (rawPlanet: StarWarsAPIPlanet): Planet => {
     climate: rawPlanet.climate !== "unknown" ? rawPlanet.climate.split(", ") : null,
     terrain: rawPlanet.terrain !== "unknown" ? rawPlanet.terrain.split(", ") : null,
     population: rawPlanet.population !== "unknown" ? Number(rawPlanet.population) : null,
-    residents: rawPlanet.residents ? rawPlanet.residents.length : null,
-    url: rawPlanet.url || null,
+    residents: rawPlanet.residents.length,
+    url: rawPlanet.url !== "unknown" ? rawPlanet.url : null,
   };
 };
 
 export const reducer: Reducer<LandingPageState, LandingPageAction> = (state, action) => {
   switch (action.type) {
-    case "fetch_start": {
-      return {
-        ...state,
-        loading: LoadingStatus.Loading,
-      };
-    }
-
     case "fetch_failure": {
       return {
         ...state,
@@ -74,17 +63,9 @@ export const reducer: Reducer<LandingPageState, LandingPageAction> = (state, act
   }
 };
 
-export const initialize = (planets: Planet[] | null): LandingPageState => {
-  if (planets) {
-    return {
-      planets,
-      loading: LoadingStatus.Success,
-      data: [],
-    };
-  }
-
+export const initialize = (): LandingPageState => {
   return {
-    loading: LoadingStatus.Initial,
+    loading: LoadingStatus.Loading,
     data: [],
     planets: [],
   };

@@ -5,8 +5,6 @@ import ErrorBlock from "components/ErrorBlock";
 import LoadingBlock from "components/LoadingBlock";
 import { fetchStarWarsAPIPlanets } from "util/fetchStarWarsAPIPlanets";
 
-// import { mockData } from "./mockData";
-
 import styles from "./styles.module.css";
 
 const LandingPage = () => {
@@ -27,24 +25,26 @@ const LandingPage = () => {
       }
     };
 
-    if (state.loading === LoadingStatus.Initial) {
-      dispatch({
-        type: "fetch_start",
-      });
-      fetchData();
-    }
+    fetchData();
   }, []);
 
   return (
     <div className={styles.container}>
-      {state.loading === LoadingStatus.Loading && <LoadingBlock />}
-      {state.loading === LoadingStatus.Failure && (
-        <ErrorBlock
-          header="Well, actually, that's not a moon. It's a space station."
-          subhead="There was an error retrieving data. Oh no! What have you done?!"
-        />
-      )}
-      {state.loading === LoadingStatus.Success && <PlanetTable planets={state.planets} />}
+      <h1>Official Best Planets Rankings</h1>
+      <p>
+        Advice, rankings and data to help you navigate your interplanetary migration journey, from
+        the experts at U.S. News and Several Worlds Report.
+      </p>
+      <div className={styles.tableContainer}>
+        {state.loading === LoadingStatus.Loading && <LoadingBlock />}
+        {state.loading === LoadingStatus.Failure && (
+          <ErrorBlock
+            header="Well, actually, that's not a moon. It's a space station."
+            subhead="There was an error retrieving data. Oh no! What have you done?!"
+          />
+        )}
+        {state.loading === LoadingStatus.Success && <PlanetTable planets={state.planets} />}
+      </div>
     </div>
   );
 };

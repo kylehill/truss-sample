@@ -2,7 +2,6 @@ module.exports = {
   collectCoverageFrom: [
     "components/**/*.{js,jsx,ts,tsx}",
     "containers/**/*.{js,jsx,ts,tsx}",
-    "contexts/**/*.{js,jsx,ts,tsx}",
     "util/**/*.{js,jsx,ts,tsx}",
     "!**/stories.{js,jsx,ts,tsx}",
   ],
@@ -18,7 +17,6 @@ module.exports = {
     "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
     "^components/(.*)$": "<rootDir>/components/$1",
     "^containers/(.*)$": "<rootDir>/containers/$1",
-    "^contexts/(.*)$": "<rootDir>/contexts/$1",
     "^types/(.*)$": "<rootDir>/types/$1",
     "^util/(.*)$": "<rootDir>/util/$1",
   },
